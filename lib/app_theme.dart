@@ -15,6 +15,7 @@ class AppTheme {
       titleTextStyle: TextStyle(fontSize: 20, fontWeight: .w500, color: white),
     ),
     textTheme: TextTheme(
+      headlineMedium: TextStyle(fontSize: 32, fontWeight: .bold, color: black),
       titleLarge: TextStyle(fontSize: 24, fontWeight: .w500, color: white),
       titleMedium: TextStyle(fontSize: 20, fontWeight: .bold, color: white),
       titleSmall: TextStyle(fontSize: 16, fontWeight: .bold, color: white),
