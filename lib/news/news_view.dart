@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:news_app/app_theme.dart';
 import 'package:news_app/models/source_model.dart';
+import 'package:news_app/news/news_item.dart';
 import 'package:news_app/news/tab_item.dart';
 
 class NewsView extends StatefulWidget {
@@ -39,6 +40,14 @@ class _NewsViewState extends State<NewsView> {
               currentIndex = index;
               setState(() {});
             },
+          ),
+        ),
+        Expanded(
+          child: ListView.separated(
+            itemBuilder: (context, index) => NewsItem(),
+            padding: EdgeInsets.only(top: 16, left: 16, right: 16),
+            separatorBuilder: (_, _) => SizedBox(height: 16),
+            itemCount: 10,
           ),
         ),
       ],
