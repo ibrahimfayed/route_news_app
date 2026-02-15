@@ -8,19 +8,17 @@ class CategoryModel {
     required this.name,
     required this.imageName,
   });
-  
-  static List<CategoryModel>categories = [
-    CategoryModel(id: '', name: 'General', imageName: 'general'),
-    CategoryModel(id: '', name: 'Business', imageName: 'business'),
-    CategoryModel(id: '', name: 'General', imageName: 'general'),
-    CategoryModel(id: '', name: 'Business', imageName: 'business'),
-    CategoryModel(id: '', name: 'General', imageName: 'general'),
-    CategoryModel(id: '', name: 'Business', imageName: 'business'),
-    CategoryModel(id: '', name: 'General', imageName: 'general'),
-    CategoryModel(id: '', name: 'Business', imageName: 'business'),
-    CategoryModel(id: '', name: 'General', imageName: 'general'),
-    CategoryModel(id: '', name: 'Business', imageName: 'business'),
 
-
+  static List<CategoryModel> categories = [
+    CategoryModel(id: 'general', name: 'General', imageName: 'general'),
+    CategoryModel(id: 'business', name: 'Business', imageName: 'business'),
+    CategoryModel(id: 'general', name: 'General', imageName: 'general'),
+    CategoryModel(id: 'business', name: 'Business', imageName: 'business'),
+    CategoryModel(id: 'general', name: 'General', imageName: 'general'),
+    CategoryModel(id: 'business', name: 'Business', imageName: 'business'),
+    CategoryModel(id: 'general', name: 'General', imageName: 'general'),
+    CategoryModel(id: 'business', name: 'Business', imageName: 'business'),
+    CategoryModel(id: 'general', name: 'General', imageName: 'general'),
+    CategoryModel(id: 'business', name: 'Business', imageName: 'business'),
   ];
 }

@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:news_app/app_theme.dart';
+import 'package:news_app/models/news_response/news.dart';
 import 'package:timeago/timeago.dart' as timeago;
 
 class NewsItem extends StatelessWidget {
+  News news;
+  NewsItem(this.news);
   @override
   Widget build(BuildContext context) {
     TextTheme textTheme = Theme.of(context).textTheme;
@@ -12,14 +15,15 @@ class NewsItem extends StatelessWidget {
       padding: EdgeInsets.all(8),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: AppTheme.white)
-        ),
+        border: Border.all(color: AppTheme.white),
+      ),
       child: Column(
+        crossAxisAlignment: .start,
         children: [
           ClipRRect(
             borderRadius: BorderRadius.circular(8),
-            child: Image.asset(
-              'assets/images/news.png',
+            child: Image.network(
+              news.urlToImage??'https://tse1.mm.bing.net/th/id/OIP.TdX9D7lAgnLjiFIgHvflfAHaHa?cb=defcache2&defcache=1&rs=1&pid=ImgDetMain&o=7&rm=3',
               height: screenHeight * 0.25,
               width: double.infinity,
               fit: .fill,
@@ -27,15 +31,15 @@ class NewsItem extends StatelessWidget {
           ),
           SizedBox(height: 10),
           Text(
-            '40-year-old man falls 200 feet to his death while canyoneering at national park',
+            news.title ?? '',
             style: textTheme.titleSmall,
           ),
           SizedBox(height: 10),
           Row(
             mainAxisAlignment: .spaceBetween,
             children: [
-              Text('By : Jon Haworth', style: textTheme.labelSmall),
-              Text(timeago.format(dateTime), style: textTheme.labelSmall),
+              Text('By : ${news.source?.name??''}', style: textTheme.labelSmall),
+              Text(timeago.format(news.publishedAt ?? DateTime.now()), style: textTheme.labelSmall),
             ],
           ),
         ],
