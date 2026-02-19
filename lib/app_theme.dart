@@ -14,6 +14,16 @@ class AppTheme {
       centerTitle: true,
       titleTextStyle: TextStyle(fontSize: 20, fontWeight: .w500, color: white),
     ),
+    elevatedButtonTheme: ElevatedButtonThemeData(
+      style: ElevatedButton.styleFrom(
+        backgroundColor: black,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadiusGeometry.circular(16),
+        ),
+        foregroundColor: white,
+        textStyle: TextStyle(fontSize: 20, fontWeight: .w500),
+      ),
+    ),
     textTheme: TextTheme(
       headlineMedium: TextStyle(fontSize: 32, fontWeight: .bold, color: black),
       titleLarge: TextStyle(fontSize: 24, fontWeight: .w500, color: white),

@@ -3,6 +3,7 @@ import 'package:news_app/app_theme.dart';
 import 'package:news_app/home_screen.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
   runApp(RouteNewsApp());
 }
 
@@ -13,7 +14,10 @@ class RouteNewsApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      routes: {HomeScreen.routeName: (_) => HomeScreen()},
+      routes: {
+        HomeScreen.routeName: (_) => HomeScreen(),
+        
+      },
       initialRoute: HomeScreen.routeName,
       theme: AppTheme.lightTheme,
       darkTheme: AppTheme.darkTheme,

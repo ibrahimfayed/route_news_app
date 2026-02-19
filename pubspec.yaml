@@ -37,6 +37,8 @@ dependencies:
   timeago: ^3.7.1
   flutter_svg: ^2.2.3
   http: ^1.6.0
+  webview_flutter: ^4.13.1
+  webview_flutter_android: ^4.10.11
 
 dev_dependencies:
   flutter_test:
