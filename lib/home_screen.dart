@@ -3,7 +3,7 @@ import 'package:news_app/app_theme.dart';
 import 'package:news_app/categories/categories_view.dart';
 import 'package:news_app/drawer/home_drawer.dart';
 import 'package:news_app/models/category_model.dart';
-import 'package:news_app/news/news_view.dart';
+import 'package:news_app/news/view/widgets/news_view.dart';
 
 class HomeScreen extends StatefulWidget {
   static const String routeName = '/home';

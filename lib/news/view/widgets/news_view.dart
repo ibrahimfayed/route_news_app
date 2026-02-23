@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:news_app/api/api_services.dart';
 import 'package:news_app/app_theme.dart';
-import 'package:news_app/models/news_response/news.dart';
-import 'package:news_app/models/sources_response/source.dart';
-import 'package:news_app/models/sources_response/sources_response.dart';
-import 'package:news_app/news/news_item.dart';
-import 'package:news_app/news/tab_item.dart';
+import 'package:news_app/news/data/models/news.dart';
+import 'package:news_app/news/view_model/news_view_model.dart';
+import 'package:news_app/sources/data/models/source.dart';
+import 'package:news_app/news/view/widgets/news_item.dart';
+import 'package:news_app/sources/view/widgets/tab_item.dart';
+import 'package:news_app/sources/view_model/sources_view_model.dart';
 import 'package:news_app/widgets/error_indicator.dart';
 import 'package:news_app/widgets/loading_indicator.dart';
+import 'package:provider/provider.dart';
 
 class NewsView extends StatefulWidget {
   String categoryId;
@@ -18,69 +20,85 @@ class NewsView extends StatefulWidget {
 
 class _NewsViewState extends State<NewsView> {
   int currentIndex = 0;
-   late Future<SourcesResponse>getSourcesFuture = APIServices.getSources(widget.categoryId,);
+  SourcesViewModel sourcesViewModel = SourcesViewModel();
+  NewsViewModel newsViewModel = NewsViewModel();
+  @override
+  void initState() {
+    super.initState();
+    sourcesViewModel.getSources(widget.categoryId);
+
+  }
 
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder(
-      future: getSourcesFuture, //future i want to listen the changes on it
-      builder: (context, snapshot) {
-        if (snapshot.connectionState == .waiting) {
-          return LoadingIndicator();
-        } else if (snapshot.hasError || snapshot.data?.status != 'ok') {
-          return ErrorIndicator();
-        } else {
-          List<Source> sources = snapshot.data?.sources ?? [];
-          return Column(
-            children: [
-              DefaultTabController(
-                length: sources.length,
-                child: TabBar(
-                  dividerColor: Colors.transparent,
-                  indicatorColor: AppTheme.white,
-                  tabAlignment: .start,
-                  labelPadding: EdgeInsetsDirectional.only(start: 16),
-                  isScrollable: true,
-                  tabs: sources
-                      .map(
-                        (source) => TabItem(
-                          source: source,
-                          isSelected: currentIndex == sources.indexOf(source),
-                        ),
-                      )
-                      .toList(),
-                  onTap: (index) {
-                    if (currentIndex == index) return;
-                    currentIndex = index;
-                    setState(() {});
-                  },
+    return ChangeNotifierProvider(
+      create: (_) => sourcesViewModel,
+      child: Consumer<SourcesViewModel>(
+        builder: (_, viewModel, _) {
+          if (viewModel.isLoading) {
+            return LoadingIndicator();
+          } else if (viewModel.errorMessage != null) {
+            return ErrorIndicator(viewModel.errorMessage!);
+          } else {
+            List<Source> sources = viewModel.sources;
+            newsViewModel.getNews(sources[currentIndex].id!);//discused at 1:08 from MVVM 
+            return Column(
+              children: [
+                DefaultTabController(
+                  length: sources.length,
+                  child: TabBar(
+                    dividerColor: Colors.transparent,
+                    indicatorColor: AppTheme.white,
+                    tabAlignment: .start,
+                    labelPadding: EdgeInsetsDirectional.only(start: 16),
+                    isScrollable: true,
+                    tabs: sources
+                        .map(
+                          (source) => TabItem(
+                            source: source,
+                            isSelected: currentIndex == sources.indexOf(source),
+                          ),
+                        )
+                        .toList(),
+                    onTap: (index) {
+                      if (currentIndex == index) return;
+                      currentIndex = index;
+                      setState(() {});
+                    },
+                  ),
                 ),
-              ),
-              Expanded(
-                child: FutureBuilder(
-                  future: APIServices.getNews(sources[currentIndex].id!),
-                  builder: (context, snapshot) {
-                    if (snapshot.connectionState == .waiting) {
-                      return LoadingIndicator();
-                    } else if (snapshot.hasError ||
-                        snapshot.data?.status != 'ok') {
-                      return ErrorIndicator();
-                    } else {
-                      List<News> newsList = snapshot.data?.newsList ?? [];
-                      return ListView.separated(
-                        itemBuilder: (context, index) => NewsItem(newsList[index]),
-                        padding: EdgeInsets.only(top: 16, left: 16, right: 16),
-                        separatorBuilder: (_, _) => SizedBox(height: 16),
-                        itemCount: newsList.length,
-                      );
-                    }
-                  },
+                Expanded(
+                  child: ChangeNotifierProvider(
+                    create: (context) => newsViewModel,
+                    child: Consumer<NewsViewModel>(
+                      builder: (_, viewModel,_) {
+                        if (viewModel.isLoading) {
+                          return LoadingIndicator();
+                        } else if (viewModel.errorMessage != null) {
+                          return ErrorIndicator(viewModel.errorMessage!);
+                        } else {
+                          List<News>newsList = viewModel.newsList;
+                          return ListView.separated(
+                            itemBuilder: (context, index) =>
+                                NewsItem(newsList[index]),
+                            padding: EdgeInsets.only(
+                              top: 16,
+                              left: 16,
+                              right: 16,
+                            ),
+                            separatorBuilder: (_, _) => SizedBox(height: 16),
+                            itemCount: newsList.length,
+                          );
+                        }
+                      },
+                    ),
+                  ),
                 ),
-              ),
-            ],
-          );
-        }
-      },
+              ],
+            );
+          }
+        },
+      ),
     );
   }
 }
