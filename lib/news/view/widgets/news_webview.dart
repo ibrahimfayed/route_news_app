@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:news_app/widgets/error_indicator.dart';
-import 'package:news_app/widgets/loading_indicator.dart';
+import 'package:news_app/shared/widgets/error_indicator.dart';
+import 'package:news_app/shared/widgets/loading_indicator.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
 class NewsWebview extends StatefulWidget {

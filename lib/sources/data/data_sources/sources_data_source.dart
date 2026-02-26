@@ -1,6 +1,6 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
-import 'package:news_app/api/api_constants.dart';
+import 'package:news_app/shared/api_constants.dart';
 import 'package:news_app/sources/data/models/sources_response.dart';
 class SourcesDataSource {
   Future<SourcesResponse> getSources(String categoryId) async {

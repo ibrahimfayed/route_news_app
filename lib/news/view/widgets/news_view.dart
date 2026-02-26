@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:news_app/api/api_services.dart';
 import 'package:news_app/app_theme.dart';
 import 'package:news_app/news/data/models/news.dart';
 import 'package:news_app/news/view_model/news_view_model.dart';
@@ -7,8 +6,8 @@ import 'package:news_app/sources/data/models/source.dart';
 import 'package:news_app/news/view/widgets/news_item.dart';
 import 'package:news_app/sources/view/widgets/tab_item.dart';
 import 'package:news_app/sources/view_model/sources_view_model.dart';
-import 'package:news_app/widgets/error_indicator.dart';
-import 'package:news_app/widgets/loading_indicator.dart';
+import 'package:news_app/shared/widgets/error_indicator.dart';
+import 'package:news_app/shared/widgets/loading_indicator.dart';
 import 'package:provider/provider.dart';
 
 class NewsView extends StatefulWidget {

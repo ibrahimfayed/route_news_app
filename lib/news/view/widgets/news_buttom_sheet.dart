@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:news_app/app_theme.dart';
 import 'package:news_app/news/data/models/news.dart';
 import 'package:news_app/news/view/widgets/news_webview.dart';
-import 'package:news_app/widgets/default_elevated_buttom.dart';
+import 'package:news_app/shared/widgets/default_elevated_buttom.dart';
 
 class NewsButtomSheet extends StatelessWidget {
   final News news;
