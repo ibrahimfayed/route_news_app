@@ -1,27 +1,5 @@
-import 'dart:convert';
-
-import 'package:http/http.dart' as http;
-import 'package:news_app/shared/api_constants.dart';
-import 'package:news_app/news/data/models/news_response.dart';
-import 'package:news_app/sources/data/models/sources_response.dart';
-
-class NewsDataSource {
-  Future<NewsResponse> getNews(
-    String sourceId, 
-  //   {
-  //   int page = 1,
-  //   int pageSize = 10,
-  // }
-  ) async {
-    Uri uri = Uri.https(APIConstants.baseUrl, APIConstants.newsEndpoint, {
-      'apiKey': APIConstants.apiKey,
-      'sources': sourceId,
-      // 'page': page.toString(),
-      // 'pageSize': pageSize.toString(),
-    });
-    http.Response response = await http.get(uri);
-    Map<String, dynamic> json = jsonDecode(response.body);
-    return NewsResponse.fromJson(json);
-  }
-  
+import 'package:news_app/news/data/models/news.dart';
+//interface
+abstract class NewsDataSource {
+  Future<List<News>> getNews(String sourceId);
 }
