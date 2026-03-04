@@ -13,11 +13,10 @@ class ServiceLocaror {
   static SourcesRepository sourcesRepository = SourcesRepository(
     sourcesDataSource,
   );
-  static SourcesViewModel sourcesViewModel = SourcesViewModel(
-    sourcesRepository,
-  );
+  static SourcesViewModel get sourcesViewModel =>
+      SourcesViewModel(sourcesRepository);
   //news
   static NewsDataSource newsDataSource = NewsAPIDataSource();
   static NewsRepository newsRepository = NewsRepository(newsDataSource);
-  static NewsViewModel newsViewModel = NewsViewModel(newsRepository);
+  static NewsViewModel get newsViewModel => NewsViewModel(newsRepository);
 }
