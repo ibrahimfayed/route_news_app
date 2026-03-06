@@ -3,7 +3,7 @@ import 'package:news_app/news/data/data_sources/news_data_source.dart';
 import 'package:news_app/news/view_model/news_view_model.dart';
 import 'package:news_app/sources/data/data_sources/sources_api_data_source.dart';
 import 'package:news_app/sources/data/data_sources/sources_data_source.dart';
-import 'package:news_app/sources/data/repository/news_repository.dart';
+import 'package:news_app/news/data/repository/news_repository.dart';
 import 'package:news_app/sources/data/repository/sources_repository.dart';
 import 'package:news_app/sources/view_model/sources_view_model.dart';
 
